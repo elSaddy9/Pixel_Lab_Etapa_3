@@ -5,7 +5,7 @@
 [node name="NivelTest" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 403, 250 )
+position = Vector2( 519, 359 )
 __meta__ = {
 "_edit_group_": true
 }
