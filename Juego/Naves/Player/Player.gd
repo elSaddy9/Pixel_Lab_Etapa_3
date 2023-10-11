@@ -8,6 +8,7 @@ export var potencia_rotacion:int = 280
 
 ##Atributos onready
 onready var canion:Canion = $Canion
+onready var laser:RayoLaser = $LaserBeam2D
 
 ##Atributos
 var empuje:Vector2 = Vector2.ZERO
@@ -20,6 +21,13 @@ func _ready():
 	pass # Replace with function body.
 
 ##Metodos
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("Laser"):
+		laser.set_is_casting(true)
+		
+	if Input.is_action_just_released("Laser"):
+		laser.set_is_casting(false)
+
 func _integrate_forces(_state: Physics2DDirectBodyState) -> void:
 	apply_central_impulse(empuje.rotated(rotation))
 	apply_torque_impulse(dir_rotacion * potencia_rotacion)

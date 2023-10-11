@@ -4,13 +4,14 @@
 [ext_resource path="res://Juego/Proyectiles/Proyectil_principal.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 9.0
-height = 48.0
+radius = 10.9999
+height = 40.0002
 
 [node name="Proyectil_principal" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0, 1.5, 0, 1 )
 rotation = 1.5708
 texture = ExtResource( 1 )
 
