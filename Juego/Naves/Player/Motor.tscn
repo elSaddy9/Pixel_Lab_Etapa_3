@@ -7,5 +7,7 @@
 stream = ExtResource( 1 )
 bus = "Disparo"
 script = ExtResource( 2 )
+tiempoTrancision = 0.3
+volumenApagado = -50.0
 
 [node name="Tween" type="Tween" parent="."]

@@ -16,4 +16,5 @@ default_color = Color( 0.0156863, 1, 0.0313726, 1 )
 gradient = SubResource( 2 )
 joint_mode = 2
 script = ExtResource( 1 )
+is_emitting = true
 lifetime = 0.6
