@@ -1,7 +1,12 @@
-extends Area2D
+extends Node2D
 
+##Atributos export
+export var hitpoints:float = 10.0
 
+func _process(delta: float) -> void:
+	$Canion.esta_disparando = true
 
-func _on_EnemigoDummy_body_entered(body: Node) -> void:
-	if body is Player:
-		body.destruir() # Replace with function body.
+func recibir_danio(danio: float) -> void:
+	hitpoints -= danio
+	if hitpoints <= 0.0 :
+		queue_free()

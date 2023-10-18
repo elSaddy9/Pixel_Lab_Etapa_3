@@ -20,14 +20,4 @@ __meta__ = {
 environment = ExtResource( 3 )
 
 [node name="EnemigoDummy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1397, 90 )
-
-[node name="EnemigoDummy4" parent="." instance=ExtResource( 5 )]
-position = Vector2( 532, -482 )
-
-[node name="EnemigoDummy2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1005, 343 )
-scale = Vector2( 5, 5 )
-
-[node name="EnemigoDummy3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 172, 577 )
+position = Vector2( 975, 326 )

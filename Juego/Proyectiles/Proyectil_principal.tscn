@@ -8,6 +8,8 @@ radius = 10.9999
 height = 40.0002
 
 [node name="Proyectil_principal" type="Area2D"]
+collision_layer = 8
+collision_mask = 16
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -21,4 +23,6 @@ shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Proyectil_principal_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Proyectil_principal_body_exited"]

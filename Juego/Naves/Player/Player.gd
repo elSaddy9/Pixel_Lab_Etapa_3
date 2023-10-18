@@ -9,6 +9,7 @@ export var potencia_motor:int = 20
 export var potencia_rotacion:int = 100
 export var estela_maxima:int = 150
 export var puede_pulsar:bool = true
+export var hitpoints: float = 10.0
 
 
 ##Atributos onready
@@ -111,3 +112,9 @@ func _on_AnimationPlayer_animation_finished(anim_name:String)->void:
 
 func destruir()->void:
 	controlador_estados(ESTADO.MUERTO)
+	
+func recibir_danio(danio: float) -> void:
+	hitpoints -= danio
+	$AudioStreamPlayer.play()
+	if hitpoints <= 0.0 :
+		destruir()
