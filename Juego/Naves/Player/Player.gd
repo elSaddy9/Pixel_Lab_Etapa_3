@@ -19,6 +19,7 @@ onready var estela:Estela = $EstelaPocision/Trail2D
 onready var motor_sfx:Motor = $Motor
 onready var colisionador: CollisionShape2D = $CollisionShape2D
 onready var animacion:AnimationPlayer = $AnimationPlayer
+onready var escudo: Area2D = $Escudo
 ##Atributos
 var empuje:Vector2 = Vector2.ZERO
 var dir_rotacion:int = 0
@@ -69,6 +70,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if (event.is_action_released("Adelante") or event.is_action_released("Atras")):
 		motor_sfx.sonido_off()
 		
+	##Control escudo
+	if event.is_action_pressed("Escudo"):
+		escudo.activar()
+		
 func _integrate_forces(_state: Physics2DDirectBodyState) -> void:
 	apply_central_impulse(empuje.rotated(rotation))
 	apply_torque_impulse(dir_rotacion * potencia_rotacion)
@@ -99,6 +104,7 @@ func player_input():
 			
 		if Input.is_action_just_released("disparo_principal"):
 			canion.set_esta_disparando(false)
+			
 		
 func esta_input_activo()->bool:
 	if estado_actual in [ESTADO.SPAWNEANDO,ESTADO.MUERTO]:
@@ -115,6 +121,6 @@ func destruir()->void:
 	
 func recibir_danio(danio: float) -> void:
 	hitpoints -= danio
-	$AudioStreamPlayer.play()
+	$AudioDanio.play()
 	if hitpoints <= 0.0 :
 		destruir()

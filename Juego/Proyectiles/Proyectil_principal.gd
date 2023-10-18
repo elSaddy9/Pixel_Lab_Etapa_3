@@ -28,8 +28,6 @@ func hacer_danio(colision:CollisionObject2D) -> void:
 		colision.recibir_danio(danio)
 		
 	queue_free()
-	print(colision.name)
-	print(colision.owner.name)
 	
 
 
