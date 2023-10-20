@@ -9,12 +9,14 @@ var danio:float = 1.0
 func _process(delta: float) -> void:
 	position += velocidad * delta
 
+# warning-ignore:unused_argument
 func crear(pos:Vector2, dir:float, vel:float, danio_p:int) -> void:
 	position = pos
 	rotation = dir
 	velocidad = Vector2(vel,0).rotated(dir)
 
 
+# warning-ignore:unused_argument
 func _on_Proyectil_principal_body_exited(body: Node) -> void:
 	queue_free() # Replace with function body.
 

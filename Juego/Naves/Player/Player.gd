@@ -19,7 +19,7 @@ onready var estela:Estela = $EstelaPocision/Trail2D
 onready var motor_sfx:Motor = $Motor
 onready var colisionador: CollisionShape2D = $CollisionShape2D
 onready var animacion:AnimationPlayer = $AnimationPlayer
-onready var escudo: Area2D = $Escudo
+onready var escudo: Escudo = $Escudo
 ##Atributos
 var empuje:Vector2 = Vector2.ZERO
 var dir_rotacion:int = 0
@@ -29,7 +29,7 @@ var estado_actual:int = ESTADO.SPAWNEANDO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_on_AnimationPlayer_animation_finished("spawn")
+	pass
 ##Metodos custom
 func controlador_estados(nuevo_estado:int)->void:
 	match nuevo_estado:
@@ -71,13 +71,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		motor_sfx.sonido_off()
 		
 	##Control escudo
-	if event.is_action_pressed("Escudo"):
+	if event.is_action_pressed("Escudo") and not escudo.get_esta_activado():
 		escudo.activar()
 		
 func _integrate_forces(_state: Physics2DDirectBodyState) -> void:
 	apply_central_impulse(empuje.rotated(rotation))
 	apply_torque_impulse(dir_rotacion * potencia_rotacion)
 	
+# warning-ignore:unused_argument
 func _process(delta: float) -> void:
 	player_input()
 		
@@ -112,9 +113,8 @@ func esta_input_activo()->bool:
 	return true
 
 ##Señales internas
-func _on_AnimationPlayer_animation_finished(anim_name:String)->void:
-	if anim_name == "spawn":
-		controlador_estados(ESTADO.VIVO)
+#func _on_AnimationPlayer_animation_finished(anim_name:String)->void:
+
 
 func destruir()->void:
 	controlador_estados(ESTADO.MUERTO)
@@ -124,3 +124,8 @@ func recibir_danio(danio: float) -> void:
 	$AudioDanio.play()
 	if hitpoints <= 0.0 :
 		destruir()
+
+
+func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	if anim_name == "spawn":
+		controlador_estados(ESTADO.VIVO) # Replace with function body.
