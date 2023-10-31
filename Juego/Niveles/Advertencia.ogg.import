@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Advertencia.ogg-70aac71f1ea07a6914ea6abe2222bb39.oggstr"
+
+[deps]
+
+source_file="res://Juego/Niveles/Advertencia.ogg"
+dest_files=[ "res://.import/Advertencia.ogg-70aac71f1ea07a6914ea6abe2222bb39.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
