@@ -59,8 +59,8 @@ contact_monitor = true
 can_sleep = false
 linear_damp = 4.0
 script = ExtResource( 2 )
-potencia_motor = 50
-potencia_rotacion = 60
+potencia_motor = 35
+potencia_rotacion = 45
 
 [node name="Sprite" type="Sprite" parent="."]
 rotation = 1.5708
@@ -77,9 +77,6 @@ position = Vector2( 45, -36 )
 
 [node name="PuntoIzquierdo" parent="Canion" index="1"]
 position = Vector2( 45, 36 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
 
 [node name="LaserBeam2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 42, 0 )
@@ -109,6 +106,9 @@ stream = ExtResource( 8 )
 volume_db = 8.0
 
 [node name="Escudo" parent="." instance=ExtResource( 9 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

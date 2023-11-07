@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Juego/Naves/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Juego/Niveles/Nivel.gd" type="Script" id=2]
 [ext_resource path="res://default_env.tres" type="Environment" id=3]
 [ext_resource path="res://Juego/Explociones/Explosion.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Juego/Meteoritos/Peligros/SectorPeligro.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Juego/Meteoritos/Meteroritos_base.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Juego/Explociones/Explocion_meteorito.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Juego/Niveles/Fondos/Fondo_espacio.png" type="Texture" id=9]
@@ -14,9 +15,10 @@ script = ExtResource( 2 )
 explocion = ExtResource( 4 )
 meteorito = ExtResource( 7 )
 destrucion_meteorito = ExtResource( 8 )
+sector_meteoritos = ExtResource( 10 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 975, 479 )
+position = Vector2( 252, 517 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -25,9 +27,18 @@ __meta__ = {
 environment = ExtResource( 3 )
 
 [node name="FondoEspacio" type="Sprite" parent="."]
-position = Vector2( 1291, 324 )
+position = Vector2( 1758, 504 )
 scale = Vector2( 500, 500 )
 z_as_relative = false
 texture = ExtResource( 9 )
 
-[node name="SectorMeteoritos" parent="." instance=ExtResource( 10 )]
+[node name="Trigger_zona_peligro" type="Node" parent="."]
+
+[node name="SectorPeligro" parent="Trigger_zona_peligro" instance=ExtResource( 5 )]
+position = Vector2( 1411, 501 )
+tipo_peligro = "Meteorito"
+numero_peligros = 12
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Tween" type="Tween" parent="."]
