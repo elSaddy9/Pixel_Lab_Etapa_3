@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Camera2D",
+"class": "CamaraNivel",
+"language": "GDScript",
+"path": "res://Juego/Niveles/CameraNivel.gd"
+}, {
+"base": "Camera2D",
+"class": "CamaraPlayer",
+"language": "GDScript",
+"path": "res://Juego/Naves/Player/CamaraPlayer.gd"
+}, {
 "base": "Node2D",
 "class": "Canion",
 "language": "GDScript",
@@ -70,6 +80,8 @@ _global_script_classes=[ {
 "path": "res://SectorPeligro.gd"
 } ]
 _global_script_class_icons={
+"CamaraNivel": "",
+"CamaraPlayer": "",
 "Canion": "",
 "Escudo": "",
 "Estela": "",
@@ -144,6 +156,11 @@ Laser={
 Escudo={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":81,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Zoom={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777218,"unicode":0,"echo":false,"script":null)
  ]
 }
 

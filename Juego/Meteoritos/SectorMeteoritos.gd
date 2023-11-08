@@ -19,11 +19,12 @@ func crear(pos: Vector2, meteoritos:int) -> void:
 ##Metodos custom
 func conectar_seniales_detectores()-> void:
 	for detector in $MeteoritoSpawn.get_children():
-		detector.connect("body_entered",self, "_on_MeteoritoSpawn_body_entered")
+		detector.connect("body_entered",self,
+		"_on_MeteoritoSpawn_body_entered")
 	
 func almacenar_spawners()-> void:
 	for spawner in $Spawners.get_children():
-		spawners.append(spawner)
+			spawners.append(spawner)
 		
 func spawner_aleatorio()-> int:
 	randomize()
