@@ -10,6 +10,7 @@ onready var animacion: AnimationPlayer = $AnimationPlayer
 
 ##Variables
 var esta_activado:bool = false setget ,get_esta_activado
+var energia_original:float
 
 func _ready() -> void:
 	set_process(false)
@@ -41,7 +42,14 @@ func desactivar() -> void:
 	controlar_colisionador(true)
 	animacion.play_backwards("Activandose")
 
-
+func controlar_energia(consumo:float) ->void:
+	energia += consumo
+	
+	if energia > energia_original:
+		energia = energia_original
+		
+	elif energia <= 0.0:	
+			desactivar()
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	if anim_name == "Activandose" and esta_activado:

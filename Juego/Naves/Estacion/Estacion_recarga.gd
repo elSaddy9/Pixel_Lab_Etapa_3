@@ -1,0 +1,47 @@
+class_name EstacionRecarga
+extends Node2D
+
+## Atributos export
+export var energia:float = 6.0
+export var radio_energia_regenerada:float = 0.05
+
+##Atributos
+var nave_player:Player = null
+var player_en_zona:bool = false
+
+
+##Metodos
+func _unhandled_input(event: InputEvent) -> void:
+	if not puede_recargar(event):
+		return
+		
+	energia -= radio_energia_regenerada
+		
+	if event.is_action("Recarga_Escudo"):
+		nave_player.get_escudo().controlar_energia(radio_energia_regenerada)
+	elif event.is_action("Recarga_laser"):
+		nave_player.get_laser().controlar_energia(radio_energia_regenerada)
+	print(radio_energia_regenerada)
+
+func _on_Estacion_body_entered(body: Node) -> void:
+	if body.has_method("destruir"):
+		body.destruir() # Replace with function body.
+	
+
+
+func _on_GravedadEstacion_body_entered(body: Node) -> void:
+	if body is Player:
+		nave_player = body # Replace with function body.
+		print(body.name)
+	body.set_gravity_scale(0.1)
+		
+	
+func _on_GravedadEstacion_body_exited(body: Node) -> void:
+		body.set_gravity_scale(0.0) # Replace with function body.
+
+func puede_recargar(event: InputEvent) -> bool:
+	var hay_input = event.is_action("Recarga_Escudo") or event.is_action("Recarga_laser")
+	if hay_input and player_en_zona and energia > 0.0:
+		return true
+		
+	return false

@@ -14,12 +14,12 @@ export var hitpoints: float = 10.0
 
 ##Atributos onready
 onready var canion:Canion = $Canion
-onready var laser:RayoLaser = $LaserBeam2D
+onready var laser:RayoLaser = $LaserBeam2D setget ,get_laser
 onready var estela:Estela = $EstelaPocision/Trail2D
 onready var motor_sfx:Motor = $Motor
 onready var colisionador: CollisionShape2D = $CollisionShape2D
 onready var animacion:AnimationPlayer = $AnimationPlayer
-onready var escudo: Escudo = $Escudo
+onready var escudo: Escudo = $Escudo setget ,get_escudo
 ##Atributos
 var empuje:Vector2 = Vector2.ZERO
 var dir_rotacion:int = 0
@@ -30,6 +30,14 @@ var estado_actual:int = ESTADO.SPAWNEANDO
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
+	
+##Stters and Getters
+func get_laser() -> RayoLaser:
+	return laser
+	
+func get_escudo() -> Escudo:
+	return escudo
+	
 ##Metodos custom
 func controlador_estados(nuevo_estado:int)->void:
 	match nuevo_estado:
@@ -135,3 +143,4 @@ func _on_Player_body_entered(body: Node) -> void:
 	if body is Meteorito:
 		body.destruir()
 		destruir() # Replace with function body.
+
