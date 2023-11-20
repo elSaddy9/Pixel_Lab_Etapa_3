@@ -14,18 +14,27 @@
 [ext_resource path="res://Juego/Naves/Enemigos/EnemigoInterceptor.tscn" type="PackedScene" id=12]
 
 [node name="NivelTest" type="Node2D"]
+position = Vector2( 96, -240 )
 script = ExtResource( 2 )
 explocion = ExtResource( 4 )
 meteorito = ExtResource( 7 )
 destrucion_meteorito = ExtResource( 8 )
 sector_meteoritos = ExtResource( 10 )
+enemigo_interceptor = ExtResource( 12 )
 
 [node name="Trigger_zona_peligro" type="Node" parent="."]
 
 [node name="SectorPeligro" parent="Trigger_zona_peligro" instance=ExtResource( 5 )]
 position = Vector2( 1618, 995 )
 tipo_peligro = "Meteorito"
-numero_peligros = 12
+numero_peligros = 6
+
+[node name="Trigger_zona_peligro2" type="Node" parent="."]
+
+[node name="SectorPeligro" parent="Trigger_zona_peligro2" instance=ExtResource( 5 )]
+position = Vector2( 1570, 227 )
+tipo_peligro = "Enemigo"
+numero_peligros = 2
 
 [node name="ContenedorEstaciones" type="Node" parent="."]
 
@@ -118,9 +127,6 @@ position = Vector2( 2461, 1010 )
 texture = ExtResource( 9 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 287, 889 )
-
-[node name="EnemigoInterceptor" parent="." instance=ExtResource( 12 )]
-position = Vector2( 431, 817 )
+position = Vector2( 31, 1145 )
 
 [connection signal="tween_completed" from="TweenCamara" to="." method="_on_TweenCamara_tween_completed"]

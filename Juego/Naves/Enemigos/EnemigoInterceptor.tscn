@@ -11,7 +11,7 @@ friction = 0.0
 bounce = 0.5
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 373.348
+radius = 518.189
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 41.9762
@@ -92,18 +92,31 @@ tracks/5/keys = {
 "method": "queue_free"
 } ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [node name="EnemigoInterceptor" instance=ExtResource( 1 )]
 z_index = 40
 z_as_relative = false
 collision_layer = 2
-collision_mask = 9
+collision_mask = 11
 physics_material_override = SubResource( 4 )
 contacts_reported = 2
 contact_monitor = true
 script = ExtResource( 4 )
-hitpoints = 20.0
-cantidad_explociones = 2
+hitpoints = 15.0
+cantidad_explociones = 1
+potencia_max = 600.0
 
 [node name="AreaDisparo" type="Area2D" parent="." index="0"]
 collision_layer = 0
@@ -124,7 +137,6 @@ scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="3"]
-visible = false
 shape = SubResource( 1 )
 
 [node name="Canion" parent="." index="4"]
@@ -146,9 +158,14 @@ anims/spawn = SubResource( 3 )
 
 [node name="SpriteSpawn" type="Sprite" parent="." index="8"]
 self_modulate = Color( 1, 0, 0, 1 )
-scale = Vector2( 1e-05, 1e-05 )
+rotation = 6.28319
+scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 3 )
 
+[connection signal="body_entered" from="AreaDisparo" to="." method="_on_AreaDisparo_body_entered"]
+[connection signal="body_exited" from="AreaDisparo" to="." method="_on_AreaDisparo_body_exited"]
+[connection signal="body_entered" from="AreaVision" to="." method="_on_AreaVision_body_entered"]
+[connection signal="body_exited" from="AreaVision" to="." method="_on_AreaVision_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
 [editable path="Canion"]

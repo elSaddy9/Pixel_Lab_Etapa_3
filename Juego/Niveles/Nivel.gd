@@ -8,6 +8,7 @@ export var destrucion_meteorito:PackedScene = null
 export var sector_meteoritos:PackedScene = null
 export var tiempo_transicion_camara:float = 0.5
 export var meteorito_totales:int = 0
+export var enemigo_interceptor:PackedScene = null
 
 ##Atributo onready
 onready var contenedor_proyectiles:Node
@@ -15,10 +16,16 @@ onready var contenedor_meteoritos:Node
 onready var contenedor_sector_meteoritos:Node
 onready var camara_nivel:Camera2D = $CameraNivel
 onready var camara_player:Camera2D = $Player/CamaraPlayer
+onready var contenedor_enemigos: Node
+
+##Atributos
+var player:Player = null
+
 ##Metodos
 func _ready() -> void:
 	conectar_seniales()
 	crear_contenedores()	
+	player = DatosJuego.get_player_actual()
 
 ##Metodos Custom	
 func conectar_seniales()->void:
@@ -45,6 +52,12 @@ func crear_contenedores()->void:
 	contenedor_sector_meteoritos = Node.new()
 	contenedor_sector_meteoritos.name = "ContenedorMeteoritos"
 	add_child(contenedor_sector_meteoritos)
+	
+	contenedor_enemigos = Node.new()
+	contenedor_enemigos.name = "ContenedorEnemigos"
+	add_child(contenedor_enemigos)
+	
+	
 
 func crear_posicion_aleatoria(rango_horizontal:float,
 rango_vertical:float)->Vector2:
@@ -97,7 +110,7 @@ num_peligros:int) -> void:
 		crear_sector_meteoritos(centro_cam,num_peligros)
 	
 	elif tipo_peligro == "Enemigo":
-		pass
+		crear_sector_enemigos(num_peligros)
 
 
 # warning-ignore:unused_argument
@@ -112,6 +125,15 @@ func crear_sector_meteoritos(centro_camara:Vector2, numero_peligros:int) -> void
 	tiempo_transicion_camara
 	)
 	print(meteorito_totales)
+
+func crear_sector_enemigos(num_enemigos:int)->void:
+# warning-ignore:unused_variable
+	for i in range(num_enemigos):
+		var new_interceptor:EnemigoInterceptor = enemigo_interceptor.instance()
+		var spawn_pos:Vector2 = crear_posicion_aleatoria(1000.0, 800.0)
+		new_interceptor.global_position = player.global_position + spawn_pos
+		contenedor_enemigos.add_child(new_interceptor)
+
 
 # warning-ignore:shadowed_variable
 func transicion_camaras(desde: Vector2, hasta: Vector2,

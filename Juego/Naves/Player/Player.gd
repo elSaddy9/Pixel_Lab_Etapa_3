@@ -16,6 +16,9 @@ onready var motor_sfx:Motor = $Motor
 onready var animacion:AnimationPlayer = $AnimationPlayer
 onready var escudo: Escudo = $Escudo setget ,get_escudo
 
+func _ready() -> void:
+	DatosJuego.set_player_actual(self)
+
 ##Stters and Getters
 func get_laser() -> RayoLaser:
 	return laser
@@ -54,7 +57,6 @@ func _integrate_forces(_state: Physics2DDirectBodyState) -> void:
 # warning-ignore:unused_argument
 func _process(delta: float) -> void:
 	player_input()
-
 
 ##Metodos Custom	
 func player_input():
