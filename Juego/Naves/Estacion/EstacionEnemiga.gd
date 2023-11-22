@@ -2,13 +2,12 @@ class_name EstacionEnemiga
 extends Node2D
 ##Atributos Export
 export var hitpoints:float = 30.0
-
+export var orbital:PackedScene = null
 ##Atributos Onready
 onready var impacto_sfx:AudioStreamPlayer2D = $ImpactoSfx
 
 ##Atributos
 var esta_destruida:bool = false
-
 ##Metodos
 func _ready() -> void:
 	$AnimationPlayer.play(elegir_animacion_aleatoria())
@@ -29,8 +28,45 @@ func recibir_danio(danio:float)->void:
 	if hitpoints <= 0 and not esta_destruida:
 		esta_destruida = true
 		destruir()
-	impacto_sfx.play()
+	impacto_sfx.play()	
+	
+func spawnaear_orbital()->void:
+	var pos_spawn:Vector2 = deteccion_cuadrante()
+	
+	var new_orbital:EnemigoOrbital = orbital.instance()
+	new_orbital.crear(
+		global_position + pos_spawn,
+		self
+	)
+	Eventos.emit_signal("spawn_orbital",new_orbital) 
 
+func deteccion_cuadrante()->Vector2:
+	var player_objetivo:Player = DatosJuego.get_player_actual()
+	
+	if not player_objetivo:
+		return Vector2.ZERO
+		
+	var dir_player:Vector2 = player_objetivo.global_position - global_position
+	var angulo_player:float = rad2deg(dir_player.angle())
+	
+	if abs(angulo_player) <= 45.0:
+		#Player entra a la derecha
+		return $PuntosSpawn/Este.position
+	elif abs(angulo_player) >135.0 and abs(angulo_player) <= 180.0:
+		#Player entra por la izquierda
+		return $PuntosSpawn/Oeste.position
+	elif abs(angulo_player) > 45.0 and abs(angulo_player) <= 135.0:
+		#Player entra por arriba o por abajo
+		if sign(angulo_player) > 0:
+			#Player entra por abajo
+			return $PuntosSpawn/Sur.position
+		else:
+			#Player entra por arriba
+			return $PuntosSpawn/Norte.position
+	
+	return $PuntosSpawn/Norte.position
+
+##Señales Internas
 func _on_AreaColision_body_entered(body: Node) -> void:
 	if body.has_method("destruir"):
 		body.destruir() # Replace with function body.
@@ -43,5 +79,10 @@ func destruir()->void:
 		$Sprites/Parte3.global_position
 	]
 	
-	Eventos.emit_signal("base_destruida",posicion_partes)
+	Eventos.emit_signal("base_destruida",self,posicion_partes)
 	queue_free()
+
+func _on_VisibilityNotifier2D_screen_entered() -> void:
+	$VisibilityNotifier2D.queue_free() # Replace with function body.
+	spawnaear_orbital()
+	# Replace with function body.

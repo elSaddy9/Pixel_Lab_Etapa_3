@@ -11,6 +11,7 @@ export var meteorito_totales:int = 0
 export var enemigo_interceptor:PackedScene = null
 
 
+
 ##Atributo onready
 onready var contenedor_proyectiles:Node
 onready var contenedor_meteoritos:Node
@@ -42,6 +43,8 @@ func conectar_seniales()->void:
 	Eventos.connect("nave_en_sector_peligro",self,"_on_nave_en_sector_peligro")
 # warning-ignore:return_value_discarded
 	Eventos.connect("base_destruida",self, "_on_base_destruida")
+# warning-ignore:return_value_discarded
+	Eventos.connect("spawn_orbital",self, "_on_spawn_orbital")
 	
 func crear_contenedores()->void:
 	contenedor_proyectiles = Node.new()
@@ -60,7 +63,9 @@ func crear_contenedores()->void:
 	contenedor_enemigos.name = "ContenedorEnemigos"
 	add_child(contenedor_enemigos)
 	
-	
+##Conexion Señales Externas
+func _on_spawn_orbital(enemigo:EnemigoOrbital)->void:
+	contenedor_enemigos.add_child(enemigo) 
 
 func crear_posicion_aleatoria(rango_horizontal:float,
 rango_vertical:float)->Vector2:

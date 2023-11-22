@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Juego/Naves/Estacion/GravedadEstacion.tscn" type="PackedScene" id=1]
 [ext_resource path="res://temporalAssets/PNG/Sprites/Station/spaceStation_017.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://temporalAssets/PNG/Sprites/Station/spaceStation_029.png" type="Texture" id=5]
 [ext_resource path="res://Juego/Naves/Estacion/EstacionEnemiga.gd" type="Script" id=6]
 [ext_resource path="res://Juego/Naves/Enemigos/AreaColision2D.gd" type="Script" id=7]
+[ext_resource path="res://Juego/Naves/Enemigos/EnemigoOrbital.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 67.0
@@ -91,6 +92,7 @@ position = Vector2( -5, 0 )
 z_index = 40
 z_as_relative = false
 script = ExtResource( 6 )
+orbital = ExtResource( 8 )
 
 [node name="GravedadEstacion" parent="." instance=ExtResource( 1 )]
 visible = false
@@ -149,6 +151,21 @@ anims/rotacion_horaria = SubResource( 3 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
+[node name="PuntosSpawn" type="Node2D" parent="."]
+
+[node name="Norte" type="Position2D" parent="PuntosSpawn"]
+position = Vector2( 0, -500 )
+
+[node name="Sur" type="Position2D" parent="PuntosSpawn"]
+position = Vector2( 0, 500 )
+
+[node name="Este" type="Position2D" parent="PuntosSpawn"]
+position = Vector2( 500, 0 )
+
+[node name="Oeste" type="Position2D" parent="PuntosSpawn"]
+position = Vector2( -500, 0 )
+
 [connection signal="body_entered" from="AreaColision" to="." method="_on_AreaColision_body_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 
 [editable path="GravedadEstacion"]
