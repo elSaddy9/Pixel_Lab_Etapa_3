@@ -10,6 +10,7 @@ export var tiempo_transicion_camara:float = 0.5
 export var meteorito_totales:int = 0
 export var enemigo_interceptor:PackedScene = null
 
+
 ##Atributo onready
 onready var contenedor_proyectiles:Node
 onready var contenedor_meteoritos:Node
@@ -39,6 +40,8 @@ func conectar_seniales()->void:
 	Eventos.connect("meteorito_destruido",self, "_on_meteorito_destruido")
 # warning-ignore:return_value_discarded
 	Eventos.connect("nave_en_sector_peligro",self,"_on_nave_en_sector_peligro")
+# warning-ignore:return_value_discarded
+	Eventos.connect("base_destruida",self, "_on_base_destruida")
 	
 func crear_contenedores()->void:
 	contenedor_proyectiles = Node.new()
@@ -81,12 +84,12 @@ func _on_nave_destrida(nave:Player, posicion: Vector2, num_explosiones:int)->voi
 			tiempo_transicion_camara
 		)
 
-	for i in range(num_explosiones):
-		var new_explosion:Node2D= explocion.instance()
-		new_explosion.global_position = posicion + crear_posicion_aleatoria(100.0,
-		50.0)
-		add_child(new_explosion)
-		yield(get_tree().create_timer(0.6),"timeout")
+	crear_explosion(posicion, num_explosiones, 0.6, Vector2(100.0, 50.0))
+		
+func _on_base_destruida(pos_partes:Array)->void:
+	for posicion in pos_partes:
+		crear_explosion(posicion)
+		yield(get_tree().create_timer(0.5),"timeout")
 
 func _on_spawn_meteoritos(pos_spawn:Vector2, dir_meteorito:Vector2, tamanio:float) -> void:
 	var new_meteorito:Meteorito = meteorito.instance()
@@ -167,3 +170,18 @@ func _on_TweenCamara_tween_completed(object: Object, key: NodePath) -> void:
 	if object.name == "CamaraPlayer":
 		object.global_position = $Player.global_position # Replace with function body.
 
+func crear_explosion(
+	posicion:Vector2,
+	numero:int =1,
+	intervalo:float = 0.0,
+	rangos_aleatorios:Vector2 = Vector2(0.0,0.0)
+)->void:
+# warning-ignore:unused_variable
+	for i in range(numero):
+		var new_explosion:Node2D = explocion.instance()
+		new_explosion.global_position = posicion + crear_posicion_aleatoria(
+			rangos_aleatorios.x,
+			rangos_aleatorios.y
+		)
+		add_child(new_explosion)
+		yield(get_tree().create_timer(intervalo),"timeout")

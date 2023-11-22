@@ -116,7 +116,7 @@ contact_monitor = true
 script = ExtResource( 4 )
 hitpoints = 15.0
 cantidad_explociones = 1
-potencia_max = 600.0
+potencia_max = 375.0
 
 [node name="AreaDisparo" type="Area2D" parent="." index="0"]
 collision_layer = 0

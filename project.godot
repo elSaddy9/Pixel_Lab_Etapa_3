@@ -40,6 +40,11 @@ _global_script_classes=[ {
 "path": "res://Juego/Naves/Player/Escudo.gd"
 }, {
 "base": "Node2D",
+"class": "EstacionEnemiga",
+"language": "GDScript",
+"path": "res://Juego/Naves/Estacion/EstacionEnemiga.gd"
+}, {
+"base": "Node2D",
 "class": "EstacionRecarga",
 "language": "GDScript",
 "path": "res://Juego/Naves/Estacion/Estacion_recarga.gd"
@@ -106,6 +111,7 @@ _global_script_class_icons={
 "EnemigoBase": "",
 "EnemigoInterceptor": "",
 "Escudo": "",
+"EstacionEnemiga": "",
 "EstacionRecarga": "",
 "Estela": "",
 "Meteorito": "",
@@ -207,6 +213,7 @@ Recarga_Escudo={
 2d_physics/layer_4="proyectil_player"
 2d_physics/layer_5="enemigo_enemigo"
 2d_physics/layer_6="Escudo"
+2d_physics/layer_8="BaseEnemiga"
 
 [physics]
 
