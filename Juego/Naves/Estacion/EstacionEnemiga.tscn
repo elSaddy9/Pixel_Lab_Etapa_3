@@ -98,6 +98,7 @@ z_index = 40
 z_as_relative = false
 script = ExtResource( 6 )
 orbital = ExtResource( 8 )
+intervalo_spawn = 1.0
 
 [node name="GravedadEstacion" parent="." instance=ExtResource( 1 )]
 

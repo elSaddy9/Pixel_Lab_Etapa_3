@@ -9,7 +9,7 @@ export var sector_meteoritos:PackedScene = null
 export var tiempo_transicion_camara:float = 0.5
 export var meteorito_totales:int = 0
 export var enemigo_interceptor:PackedScene = null
-
+export var rele:PackedScene = null
 
 
 ##Atributo onready
@@ -22,13 +22,15 @@ onready var contenedor_enemigos: Node
 
 ##Atributos
 var player:Player = null
+var cantidad_base_enemiga:int = 0
 
 ##Metodos
 func _ready() -> void:
 	conectar_seniales()
 	crear_contenedores()	
+	cantidad_base_enemiga = contabilizar_bases_enemigas()
 	player = DatosJuego.get_player_actual()
-
+	
 ##Metodos Custom	
 func conectar_seniales()->void:
 # warning-ignore:return_value_discarded
@@ -46,6 +48,9 @@ func conectar_seniales()->void:
 # warning-ignore:return_value_discarded
 	Eventos.connect("spawn_orbital",self, "_on_spawn_orbital")
 	
+func contabilizar_bases_enemigas()->int:
+	return $ContenedorBaseEnemiga.get_child_count()
+	
 func crear_contenedores()->void:
 	contenedor_proyectiles = Node.new()
 	contenedor_proyectiles.name = "ContenedorProyectiles"
@@ -62,6 +67,11 @@ func crear_contenedores()->void:
 	contenedor_enemigos = Node.new()
 	contenedor_enemigos.name = "ContenedorEnemigos"
 	add_child(contenedor_enemigos)
+	
+func crear_rele()->void:
+	var new_rele_masa:ReleMasa = rele.instance()
+	new_rele_masa.global_position = player.global_position + crear_posicion_aleatoria(1000.0, 800.0)
+	add_child(new_rele_masa)	
 	
 ##Conexion Señales Externas
 func _on_spawn_orbital(enemigo:EnemigoOrbital)->void:
@@ -96,6 +106,10 @@ func _on_base_destruida(base:EstacionEnemiga,pos_partes:Array)->void:
 	for posicion in pos_partes:
 		crear_explosion(posicion)
 		yield(get_tree().create_timer(0.5),"timeout")
+		
+	cantidad_base_enemiga -=1
+	if cantidad_base_enemiga == 0:
+		crear_rele()
 
 func _on_spawn_meteoritos(pos_spawn:Vector2, dir_meteorito:Vector2, tamanio:float) -> void:
 	var new_meteorito:Meteorito = meteorito.instance()
