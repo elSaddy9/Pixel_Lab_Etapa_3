@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Juego/UI/HUD.gd" type="Script" id=1]
+[ext_resource path="res://icon_juego.png" type="Texture" id=2]
+[ext_resource path="res://Juego/UI/InfoZonaRecarga.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Juego/UI/InfoMeteoritos.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Fade"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="FadeCanvas" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="FadeCanvas"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="FadeCanvas/ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -116.5
+margin_top = -88.5
+margin_right = 116.5
+margin_bottom = 88.5
+mouse_filter = 2
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FadeCanvas"]
+anims/Fade = SubResource( 1 )
+
+[node name="InfoZonaRecarga" parent="." instance=ExtResource( 3 )]
+
+[node name="AnimationPlayer" parent="InfoZonaRecarga" index="0"]
+autoplay = "Ocultar"
+
+[node name="InfoMeteoritos" parent="." instance=ExtResource( 4 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = -142.0
+margin_right = 368.0
+margin_bottom = -10.0
+
+[node name="Label" parent="InfoMeteoritos" index="1"]
+margin_top = -52.0
+margin_right = 103.0
+margin_bottom = 59.0
+text = "meteoritos
+ restantes
+          5"
+
+[editable path="InfoZonaRecarga"]
+[editable path="InfoMeteoritos"]

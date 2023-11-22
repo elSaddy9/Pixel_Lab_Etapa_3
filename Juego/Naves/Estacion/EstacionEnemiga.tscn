@@ -8,6 +8,7 @@
 [ext_resource path="res://Juego/Naves/Estacion/EstacionEnemiga.gd" type="Script" id=6]
 [ext_resource path="res://Juego/Naves/Enemigos/AreaColision2D.gd" type="Script" id=7]
 [ext_resource path="res://Juego/Naves/Enemigos/EnemigoOrbital.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Juego/Naves/Enemigos/rutas/RutaEnemigo.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 67.0
@@ -85,11 +86,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 360.0 ]
-}
-
-[sub_resource type="Curve2D" id=5]
-_data = {
-"points": PoolVector2Array( -96, 20, 96, -20, -4, -416, -35, 63, 35, -63, 164, -324, 60, 1, -60, -1, 300, -268, -60.0678, -4.00452, 60.0678, 4.00452, 352, -112, 69.4117, 66.742, -69.4117, -66.742, 364, 68, -142.544, 32.0724, 142.544, -32.0724, 320, 204, 7.12719, 101.562, -7.12719, -101.562, 192, 364, -30.2906, 263.706, 30.2906, -263.706, 16, 400, 19.5998, 162.144, -19.5998, -162.144, -196, 356, 71.2719, 5.34539, -71.2719, -5.34539, -376, 172, -89.0899, -32.0724, 89.0899, 32.0724, -400, 24, -119.38, -3.56359, 119.38, 3.56359, -424, -96, -108.69, -49.8903, 108.69, 49.8903, -300, -204, -122.944, 81.9627, 122.944, -81.9627, -268, -340, 0, 0, 0, 0, -128, -356, -53, 29, 53, -29, -36, -432, 0, 0, 0, 0, -4, -416 )
 }
 
 [node name="EstacionEnemiga" type="Node2D"]
@@ -170,9 +166,7 @@ position = Vector2( 500, 0 )
 [node name="Oeste" type="Position2D" parent="PuntosSpawn"]
 position = Vector2( -500, 0 )
 
-[node name="RutaEnemigo" type="Path2D" parent="."]
-position = Vector2( 29, -22 )
-curve = SubResource( 5 )
+[node name="RutaEnemigo" parent="." instance=ExtResource( 9 )]
 
 [node name="TimerSpawnEnemigos" type="Timer" parent="."]
 

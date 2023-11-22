@@ -35,13 +35,14 @@ func _on_GravedadEstacion_body_entered(body: Node) -> void:
 	if body is Player:
 		player_en_zona = true
 		nave_player = body # Replace with function body.
+		Eventos.emit_signal("detecto_zona_recarga",true)
 		
-		print(body.name)
 		
 func _on_GravedadEstacion_body_exited(body: Node) -> void:
 	if body is Player:
 		player_en_zona = false
 		carga_sfx.stop()
+		Eventos.emit_signal("detecto_zona_recarga",false)
 		# Replace with function body.
 
 func puede_recargar(event: InputEvent) -> bool:

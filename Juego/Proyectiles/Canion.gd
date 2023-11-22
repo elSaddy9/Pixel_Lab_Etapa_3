@@ -27,7 +27,7 @@ func _ready() -> void:
 	Timer_enfriamiento.wait_time = cadencia_disparo
 	
 func _process(_delta: float) -> void:
-	if esta_disparando and esta_enfriado:
+	if esta_disparando and esta_enfriado and puede_disparar:
 		disparar()
 		
 func almacenar_puntos_disparo()->void:

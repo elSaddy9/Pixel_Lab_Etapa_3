@@ -4,7 +4,7 @@ extends NaveBase
 ##Atributos
 var player_objetivo:Player = null
 var dir_player:Vector2
-
+var frame_actual:int = 0
 
 func _ready() -> void:
 	player_objetivo = DatosJuego.get_player_actual()
@@ -19,7 +19,9 @@ func _on_body_entered(body:Node)->void:
 
 # warning-ignore:unused_argument
 func _physics_process(delta: float) -> void:
-	rotar_hacia_player()
+	frame_actual += 1
+	if frame_actual % 3 == 0:
+		rotar_hacia_player()
 	
 ##Metodos Custom
 func rotar_hacia_player()->void:
