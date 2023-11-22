@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Juego/Naves/Estacion/GravedadEstacion.tscn" type="PackedScene" id=1]
 [ext_resource path="res://temporalAssets/PNG/Sprites/Station/spaceStation_017.png" type="Texture" id=2]
@@ -87,6 +87,11 @@ tracks/1/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
+[sub_resource type="Curve2D" id=5]
+_data = {
+"points": PoolVector2Array( -96, 20, 96, -20, -4, -416, -35, 63, 35, -63, 164, -324, 60, 1, -60, -1, 300, -268, -60.0678, -4.00452, 60.0678, 4.00452, 352, -112, 69.4117, 66.742, -69.4117, -66.742, 364, 68, -142.544, 32.0724, 142.544, -32.0724, 320, 204, 7.12719, 101.562, -7.12719, -101.562, 192, 364, -30.2906, 263.706, 30.2906, -263.706, 16, 400, 19.5998, 162.144, -19.5998, -162.144, -196, 356, 71.2719, 5.34539, -71.2719, -5.34539, -376, 172, -89.0899, -32.0724, 89.0899, 32.0724, -400, 24, -119.38, -3.56359, 119.38, 3.56359, -424, -96, -108.69, -49.8903, 108.69, 49.8903, -300, -204, -122.944, 81.9627, 122.944, -81.9627, -268, -340, 0, 0, 0, 0, -128, -356, -53, 29, 53, -29, -36, -432, 0, 0, 0, 0, -4, -416 )
+}
+
 [node name="EstacionEnemiga" type="Node2D"]
 position = Vector2( -5, 0 )
 z_index = 40
@@ -95,7 +100,6 @@ script = ExtResource( 6 )
 orbital = ExtResource( 8 )
 
 [node name="GravedadEstacion" parent="." instance=ExtResource( 1 )]
-visible = false
 
 [node name="Sprite" parent="GravedadEstacion" index="0"]
 modulate = Color( 0.07, 0.47, 0.69, 0 )
@@ -165,7 +169,14 @@ position = Vector2( 500, 0 )
 [node name="Oeste" type="Position2D" parent="PuntosSpawn"]
 position = Vector2( -500, 0 )
 
+[node name="RutaEnemigo" type="Path2D" parent="."]
+position = Vector2( 29, -22 )
+curve = SubResource( 5 )
+
+[node name="TimerSpawnEnemigos" type="Timer" parent="."]
+
 [connection signal="body_entered" from="AreaColision" to="." method="_on_AreaColision_body_entered"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="timeout" from="TimerSpawnEnemigos" to="." method="_on_TimerSpawnEnemigos_timeout"]
 
 [editable path="GravedadEstacion"]

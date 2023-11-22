@@ -42,7 +42,7 @@ func conectar_seniales()->void:
 # warning-ignore:return_value_discarded
 	Eventos.connect("nave_en_sector_peligro",self,"_on_nave_en_sector_peligro")
 # warning-ignore:return_value_discarded
-	Eventos.connect("base_destruida",self, "_on_base_destruida")
+	Eventos.connect("base_destruida",self,"_on_base_destruida")
 # warning-ignore:return_value_discarded
 	Eventos.connect("spawn_orbital",self, "_on_spawn_orbital")
 	
@@ -91,7 +91,8 @@ func _on_nave_destrida(nave:Player, posicion: Vector2, num_explosiones:int)->voi
 
 	crear_explosion(posicion, num_explosiones, 0.6, Vector2(100.0, 50.0))
 		
-func _on_base_destruida(pos_partes:Array)->void:
+# warning-ignore:unused_argument
+func _on_base_destruida(base:EstacionEnemiga,pos_partes:Array)->void:
 	for posicion in pos_partes:
 		crear_explosion(posicion)
 		yield(get_tree().create_timer(0.5),"timeout")
