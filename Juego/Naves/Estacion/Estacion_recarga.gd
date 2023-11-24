@@ -24,9 +24,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		nave_player.get_escudo().controlar_energia(radio_energia_regenerada)
 	elif event.is_action("Recarga_laser"):
 		nave_player.get_laser().controlar_energia(radio_energia_regenerada)
-		
-	print(radio_energia_regenerada)
-
+	
+	if event.is_action_released("Recarga_laser"):
+		Eventos.emit_signal("ocultar_energia_laser")
+	elif event.is_action_released("Recarga_Escudo"):
+		Eventos.emit_signal("ocultar_energia_escudo")
+	
+	
 func _on_Estacion_body_entered(body: Node) -> void:
 	if body.has_method("destruir"):
 		body.destruir() # Replace with function body.
@@ -58,3 +62,4 @@ func controlar_energia()->void:
 	energia -= radio_energia_regenerada
 	if energia <= 0.0:
 		carga_vacia_sfx.play()
+	

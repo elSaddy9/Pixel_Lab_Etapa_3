@@ -21,3 +21,13 @@ signal nivel_terminado()
 signal detecto_zona_recarga(entrando)
 # warning-ignore:unused_signal
 signal cambio_numero_meteoritos(numero)
+# warning-ignore:unused_signal
+signal actualizar_tiempo(tiempo_restante)
+# warning-ignore:unused_signal
+signal cambio_energia_laser(energia_max, energia_actual)
+# warning-ignore:unused_signal
+signal ocultar_energia_laser()
+# warning-ignore:unused_signal
+signal cambio_energia_escudo(energia_max, energia_actual)
+# warning-ignore:unused_signal
+signal ocultar_energia_escudo()

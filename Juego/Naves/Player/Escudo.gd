@@ -8,7 +8,7 @@ export var radio_desgaste:float = -1.6
 onready var colisionador: CollisionShape2D = $CollisionShape2D
 onready var animacion: AnimationPlayer = $AnimationPlayer
 
-##Variables
+##Atributos
 var esta_activado:bool = false setget ,get_esta_activado
 var energia_original:float
 
@@ -47,10 +47,13 @@ func controlar_energia(consumo:float) ->void:
 	
 	if energia > energia_original:
 		energia = energia_original
+	elif energia <= 0.0:
+		Eventos.emit_signal("ocultar_energia_escudo")	
+		desactivar()
+		return
 		
-	elif energia <= 0.0:	
-			desactivar()
-
+	Eventos.emit_signal("cambio_energia_escudo",energia_original,energia)
+	
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	if anim_name == "Activandose" and esta_activado:
 		animacion.play("Activado")

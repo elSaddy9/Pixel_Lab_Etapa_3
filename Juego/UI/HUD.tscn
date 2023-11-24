@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Juego/UI/HUD.gd" type="Script" id=1]
 [ext_resource path="res://icon_juego.png" type="Texture" id=2]
 [ext_resource path="res://Juego/UI/InfoZonaRecarga.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Juego/UI/InfoMeteoritos.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Juego/UI/InfoTiempoRestante.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Juego/UI/InfoLaser.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Juego/UI/InfoEnergiaEscudo.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Fade"
@@ -48,12 +51,12 @@ stretch_mode = 2
 [node name="AnimationPlayer" type="AnimationPlayer" parent="FadeCanvas"]
 anims/Fade = SubResource( 1 )
 
-[node name="InfoZonaRecarga" parent="." instance=ExtResource( 3 )]
+[node name="InfoZonaRecarga" parent="." groups=["contenedor_info"] instance=ExtResource( 3 )]
 
 [node name="AnimationPlayer" parent="InfoZonaRecarga" index="0"]
 autoplay = "Ocultar"
 
-[node name="InfoMeteoritos" parent="." instance=ExtResource( 4 )]
+[node name="InfoMeteoritos" parent="." groups=["contenedor_info"] instance=ExtResource( 4 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 12.0
@@ -69,5 +72,52 @@ text = "meteoritos
  restantes
           5"
 
+[node name="InfoTiempoRestante" parent="." groups=["contenedor_info"] instance=ExtResource( 5 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -356.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 132.0
+
+[node name="InfoLaser" parent="." groups=["contenedor_info"] instance=ExtResource( 6 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -356.0
+margin_top = -281.0
+margin_right = 0.0
+margin_bottom = -149.0
+
+[node name="Label" parent="InfoLaser" index="1"]
+margin_left = -124.0
+margin_right = 125.0
+text = "energia laser"
+
+[node name="ProgressBar" parent="InfoLaser" index="3"]
+value = 100.0
+
+[node name="InfoEnergiaEscudo" parent="." groups=["contenedor_info"] instance=ExtResource( 7 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -356.0
+margin_top = -132.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="Label" parent="InfoEnergiaEscudo" index="1"]
+margin_left = -131.0
+margin_right = 139.0
+text = "energia escudo"
+
+[node name="ProgressBar" parent="InfoEnergiaEscudo" index="3"]
+value = 100.0
+
 [editable path="InfoZonaRecarga"]
 [editable path="InfoMeteoritos"]
+[editable path="InfoTiempoRestante"]
+[editable path="InfoLaser"]
+[editable path="InfoEnergiaEscudo"]

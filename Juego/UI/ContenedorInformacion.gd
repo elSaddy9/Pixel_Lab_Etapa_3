@@ -10,20 +10,34 @@ onready var texto_contenedor:Label = $Label
 onready var auto_ocultar_timer:Timer = $AutoOcultarTimer
 onready var animaciones:AnimationPlayer = $AnimationPlayer
 
+##Atributos
+var esta_activo:bool = true setget set_esta_activo
+
+##Setters and Getters
+func set_esta_activo(valor:bool)->void:
+	esta_activo = valor
+
 #Metodos
 func mostrar()->void:
-	animaciones.play("Mostrar")
+	if esta_activo:
+		animaciones.play("Mostrar")
 	
 func ocultar()->void:
+	if not esta_activo:
+		animaciones.stop()
 	animaciones.play("Ocultar")
 	
 func mostrar_suavizado()->void:
+	if not esta_activo:
+		return
+		
 	animaciones.play("Mostrar_suavizado")
 	if auto_ocultar:
 		auto_ocultar_timer.start()
 	
 func ocultar_suavizado()->void:
-	animaciones.play("Ocultar_suavizado")
+	if esta_activo:
+		animaciones.play("Ocultar_suavizado")
 
 func modificar_texto(text:String)->void:
 	texto_contenedor.text = text
