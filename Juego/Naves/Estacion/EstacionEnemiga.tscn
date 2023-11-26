@@ -88,7 +88,7 @@ tracks/1/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[node name="EstacionEnemiga" type="Node2D"]
+[node name="EstacionEnemiga" type="Node2D" groups=["minimapa"]]
 position = Vector2( -5, 0 )
 z_index = 40
 z_as_relative = false

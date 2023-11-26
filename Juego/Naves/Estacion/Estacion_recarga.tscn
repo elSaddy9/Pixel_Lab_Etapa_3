@@ -42,7 +42,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=4]
 resource_name = "default"
 
-[node name="Estacion_recarga" type="Node2D"]
+[node name="Estacion_recarga" type="Node2D" groups=["minimapa"]]
 script = ExtResource( 3 )
 
 [node name="GravedadEstacion" parent="." instance=ExtResource( 2 )]

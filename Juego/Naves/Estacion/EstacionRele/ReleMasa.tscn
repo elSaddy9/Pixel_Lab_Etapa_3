@@ -293,7 +293,7 @@ tracks/2/keys = {
 [sub_resource type="CircleShape2D" id=5]
 radius = 481.751
 
-[node name="ReleMasa" type="Node2D"]
+[node name="ReleMasa" type="Node2D" groups=["minimapa"]]
 script = ExtResource( 6 )
 
 [node name="Sprites" type="Node2D" parent="."]
