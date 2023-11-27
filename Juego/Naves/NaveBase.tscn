@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Juego/Naves/NaveBase.gd" type="Script" id=1]
+[ext_resource path="res://Juego/UI/BarraSalud/BarraSalud.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Juego/Proyectiles/Canion.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Juego/Proyectiles/Proyectil_player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Juego/Naves/Player/Daño_player.ogg" type="AudioStream" id=5]
@@ -23,5 +24,7 @@ proyectil = ExtResource( 4 )
 [node name="AudioDanio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = 8.0
+
+[node name="BarraSalud" parent="." instance=ExtResource( 2 )]
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]

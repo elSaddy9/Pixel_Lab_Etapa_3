@@ -12,12 +12,16 @@ export var cantidad_explociones:int = 4
 ##Atributos onready
 onready var canion:Canion = $Canion
 onready var colisionador: CollisionShape2D = $CollisionShape2D
+onready var barra_salud:ProgressBar = $BarraSalud
+onready var impacto_sfx:AudioStreamPlayer = $AudioDanio
 ##Atributos
 var estado_actual:int = ESTADO.SPAWNEANDO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	barra_salud.max_value = hitpoints
+	barra_salud.value = hitpoints
+	controlador_estados(estado_actual)
 	
 ##Metodos custom
 func controlador_estados(nuevo_estado:int)->void:
@@ -42,7 +46,7 @@ func controlador_estados(nuevo_estado:int)->void:
 
 ##Señales internas
 #func _on_AnimationPlayer_animation_finished(anim_name:String)->void:
-
+##
 
 func destruir()->void:
 	controlador_estados(ESTADO.MUERTO)
@@ -52,7 +56,9 @@ func recibir_danio(danio: float) -> void:
 	$AudioDanio.play()
 	if hitpoints <= 0.0 :
 		destruir()
-
+	
+	barra_salud.controlar_barra(hitpoints, true)
+	impacto_sfx.play()
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	if anim_name == "spawn":

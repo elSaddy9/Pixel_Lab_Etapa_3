@@ -4,6 +4,7 @@ extends Node2D
 ## Atributos onready
 onready var carga_sfx:AudioStreamPlayer = $SonidoRecarga
 onready var carga_vacia_sfx:AudioStreamPlayer = $SonidoSinEnergia
+onready var barra_energia:ProgressBar = $BarraEnergia
 
 ## Atributos export
 export var energia:float = 6.0
@@ -14,6 +15,10 @@ var nave_player:Player = null
 var player_en_zona:bool = false
 
 ##Metodos
+func _ready() -> void:
+	barra_energia.max_value = energia
+	barra_energia.value = energia
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not puede_recargar(event):
 		return
@@ -63,3 +68,4 @@ func controlar_energia()->void:
 	if energia <= 0.0:
 		carga_vacia_sfx.play()
 	
+	barra_energia.value = energia

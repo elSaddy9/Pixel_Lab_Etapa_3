@@ -77,7 +77,8 @@ func _on_nivel_iniciado()->void:
 func _on_nave_destruida(nave:NaveBase, _posicion, _explosiones)->void:
 	if nave is Player:
 		player = null
-
+		get_tree().call_group("contenedor_info","set_esta_activo", false)
+		get_tree().call_group("contenedor_info", "ocultar")
 func obtener_objetos_minimapa()->void:
 	var objetos_en_ventana:Array = get_tree().get_nodes_in_group("minimapa")
 	for objeto in objetos_en_ventana:
@@ -123,3 +124,5 @@ func quitar_icono(objeto:Node2D)->void:
 func _on_TimerVisibilidad_timeout() -> void:
 	if esta_visible:
 		set_esta_visible(false) # Replace with function body.
+
+	

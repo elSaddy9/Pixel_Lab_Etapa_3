@@ -7,3 +7,6 @@
 [node name="Label" parent="." index="1"]
 margin_top = -54.0
 margin_bottom = 24.0
+
+[node name="AutoOcultarTimer" parent="." index="2"]
+one_shot = false

@@ -66,6 +66,13 @@ position = Vector2( 41, 0 )
 
 [node name="CamaraPlayer" parent="." index="10" instance=ExtResource( 2 )]
 
+[node name="BarraSalud" parent="." index="11"]
+margin_left = -68.0
+margin_top = 48.0
+margin_right = 25.0
+margin_bottom = 62.0
+rect_rotation = -89.8292
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
 [editable path="Canion"]

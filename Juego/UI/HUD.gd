@@ -64,7 +64,7 @@ func _on_actualizar_info_tiempo(tiempo_restante:int)->void:
 		info_tiempo_restante.ocultar_suavizado()
 	
 	if tiempo_restante == 11:
-		info_tiempo_restante.set_auto_ocultar(false)
+		info_tiempo_restante.ocultar_suavizado()
 	elif tiempo_restante ==0:
 		info_tiempo_restante.ocultar()
 

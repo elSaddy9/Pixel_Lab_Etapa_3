@@ -118,14 +118,8 @@ text = "energia escudo"
 [node name="ProgressBar" parent="InfoEnergiaEscudo" index="3"]
 value = 100.0
 
-[node name="MiniMapa" parent="." instance=ExtResource( 8 )]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -20.0
+[node name="MiniMapa" parent="." groups=["contenedor_info"] instance=ExtResource( 8 )]
 margin_top = -118.0
-margin_right = 20.0
 margin_bottom = -78.0
 
 [node name="MiniMapa" parent="MiniMapa/CuadroMiniMapa/ContenedorIconos/TextureRect" index="0"]
