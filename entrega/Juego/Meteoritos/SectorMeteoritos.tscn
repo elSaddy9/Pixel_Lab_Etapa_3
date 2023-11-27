@@ -1,0 +1,232 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Juego/Meteoritos/Meteorito_spawner.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Juego/Meteoritos/SectorMeteoritos.gd" type="Script" id=2]
+[ext_resource path="res://temporalAssets/Fonts/kenvector_future.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Juego/Niveles/Advertencia.ogg" type="AudioStream" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 9.58208, 13 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 435.417, 8.25001 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 50
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "default"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("SpawnerTimer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ -1 ],
+"method": "start"
+} ]
+}
+
+[node name="SectorMeteoritos" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="SectorNave" type="Node2D" parent="."]
+position = Vector2( -970, -536 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SectorNave"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SectorNave/StaticBody2D"]
+position = Vector2( 960.5, 0 )
+scale = Vector2( 100, 1 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="SectorNave"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SectorNave/StaticBody2D2"]
+position = Vector2( 957.208, 1083 )
+scale = Vector2( 100, 1 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="SectorNave"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SectorNave/StaticBody2D3"]
+position = Vector2( 8, 532.65 )
+rotation = 1.5708
+scale = Vector2( 60, 1 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="SectorNave"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SectorNave/StaticBody2D4"]
+position = Vector2( 1924, 532.65 )
+rotation = 1.5708
+scale = Vector2( 60, 1 )
+shape = SubResource( 1 )
+
+[node name="MeteoritoSpawn" type="Node2D" parent="."]
+position = Vector2( -970, -536 )
+
+[node name="Detector" type="Area2D" parent="MeteoritoSpawn"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeteoritoSpawn/Detector"]
+position = Vector2( 972, -240.25 )
+scale = Vector2( 2.7, 1 )
+shape = SubResource( 2 )
+
+[node name="Detector2" type="Area2D" parent="MeteoritoSpawn"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeteoritoSpawn/Detector2"]
+position = Vector2( 972, 1331 )
+scale = Vector2( 2.7, 1 )
+shape = SubResource( 2 )
+
+[node name="Detector3" type="Area2D" parent="MeteoritoSpawn"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeteoritoSpawn/Detector3"]
+position = Vector2( -181, 532.25 )
+rotation = 1.5708
+scale = Vector2( 1.9, 1 )
+shape = SubResource( 2 )
+
+[node name="Detector4" type="Area2D" parent="MeteoritoSpawn"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeteoritoSpawn/Detector4"]
+position = Vector2( 2126, 541 )
+rotation = 1.5708
+scale = Vector2( 1.9, 1 )
+shape = SubResource( 2 )
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="Meteorito_spawner" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( 0, -617 )
+
+[node name="Meteorito_spawner12" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( -458, -617 )
+
+[node name="Meteorito_spawner11" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( 526, -617 )
+
+[node name="Meteorito_spawner13" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( -458, 636 )
+direccion = Vector2( 2, 1 )
+
+[node name="Meteorito_spawner14" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( 526, 636 )
+direccion = Vector2( -2, -1 )
+
+[node name="Meteorito_spawner6" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( -1035, -617 )
+direccion = Vector2( 2, 1 )
+
+[node name="Meteorito_spawner5" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( 1024, -617 )
+direccion = Vector2( -2, 1 )
+
+[node name="Meteorito_spawner2" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( 0, 639 )
+
+[node name="Meteorito_spawner8" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( -1030, 639 )
+direccion = Vector2( 2, -1 )
+
+[node name="Meteorito_spawner7" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( 1018, 639 )
+direccion = Vector2( -2, -1 )
+
+[node name="Meteorito_spawner3" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( 1024, 0 )
+
+[node name="Meteorito_spawner10" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( 1024, 300 )
+direccion = Vector2( 1, -1 )
+
+[node name="Meteorito_spawner9" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( 1024, -294 )
+direccion = Vector2( -2, 1 )
+
+[node name="Meteorito_spawner15" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( -1038, 300 )
+direccion = Vector2( 2, -1 )
+
+[node name="Meteorito_spawner16" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( -1038, -294 )
+direccion = Vector2( 2, 1 )
+
+[node name="Meteorito_spawner4" parent="Spawners" instance=ExtResource( 1 )]
+position = Vector2( -1041, 0 )
+direccion = Vector2( -1, 1 )
+
+[node name="SpawnerTimer" type="Timer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.933333, 0.00784314, 0.00784314, 1 )
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -767.0
+margin_top = -25.0
+margin_right = 776.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 3 )
+text = "ADVERTENCIA LLUVIA DE METEORITOS INMINENTE"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "Disparo"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 4 )
+
+[connection signal="timeout" from="SpawnerTimer" to="." method="_on_SpawnerTimer_timeout"]

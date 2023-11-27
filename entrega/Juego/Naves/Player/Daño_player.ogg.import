@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Daño_player.ogg-97abf02ef7673ca377b50e7446128711.oggstr"
+
+[deps]
+
+source_file="res://Juego/Naves/Player/Daño_player.ogg"
+dest_files=[ "res://.import/Daño_player.ogg-97abf02ef7673ca377b50e7446128711.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

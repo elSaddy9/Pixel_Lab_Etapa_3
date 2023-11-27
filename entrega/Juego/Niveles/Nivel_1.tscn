@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Juego/Niveles/NivelTest.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Juego/Naves/Estacion/EstacionEnemiga.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Juego/Meteoritos/Peligros/SectorPeligro.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Juego/Naves/Estacion/Estacion_recarga.tscn" type="PackedScene" id=4]
+
+[node name="Nivel_1" instance=ExtResource( 1 )]
+prox_nivel = "res://Juego/Niveles/Nivel_2.tscn"
+
+[node name="SectorPeligro" parent="Trigger_zona_peligro" index="0"]
+position = Vector2( 1233, 723 )
+
+[node name="SectorPeligro" parent="Trigger_zona_peligro2" index="0" instance=ExtResource( 3 )]
+position = Vector2( 6373, 755 )
+tipo_peligro = "Enemigo"
+
+[node name="Estacion_recarga2" parent="ContenedorEstaciones" index="1" instance=ExtResource( 4 )]
+position = Vector2( 4693, 1843 )
+
+[node name="EstacionEnemiga" parent="ContenedorBaseEnemiga" index="0"]
+position = Vector2( 3138, -1455 )
+
+[node name="EstacionEnemiga2" parent="ContenedorBaseEnemiga" index="1" instance=ExtResource( 2 )]
+position = Vector2( 7516, 2296 )
+
+[node name="Sprite" parent="ParallaxBackground/ParallaxLayer" index="0"]
+position = Vector2( 9, -1 )

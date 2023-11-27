@@ -1,0 +1,196 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Juego/Naves/Estacion/GravedadEstacion.tscn" type="PackedScene" id=1]
+[ext_resource path="res://temporalAssets/PNG/Sprites/Station/spaceStation_017.png" type="Texture" id=2]
+[ext_resource path="res://temporalAssets/PNG/Sprites/Station/spaceStation_024.png" type="Texture" id=3]
+[ext_resource path="res://temporalAssets/PNG/Sprites/Station/spaceStation_028.png" type="Texture" id=4]
+[ext_resource path="res://temporalAssets/PNG/Sprites/Station/spaceStation_029.png" type="Texture" id=5]
+[ext_resource path="res://Juego/Naves/Estacion/EstacionEnemiga.gd" type="Script" id=6]
+[ext_resource path="res://Juego/Naves/Enemigos/AreaColision2D.gd" type="Script" id=7]
+[ext_resource path="res://Juego/Naves/Enemigos/EnemigoOrbital.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Juego/Naves/Enemigos/rutas/RutaEnemigo.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Juego/UI/BarraSalud/BarraSalud.tscn" type="PackedScene" id=10]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 67.0
+height = 348.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "default"
+length = 5.0
+
+[sub_resource type="Animation" id=4]
+resource_name = "rotacion_anti_horario"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AreaColision:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -360.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GravedadEstacion/Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.07, 0.47, 0.69, 0 ), Color( 0.07, 0.47, 0.69, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "rotacion_horaria"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprites:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AreaColision:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.741176, 0, 1, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color( 0.227451, 0.427451, 0.243137, 1 )
+border_blend = true
+
+[node name="EstacionEnemiga" type="Node2D" groups=["minimapa"]]
+position = Vector2( -5, 0 )
+z_index = 40
+z_as_relative = false
+script = ExtResource( 6 )
+orbital = ExtResource( 8 )
+intervalo_spawn = 1.0
+
+[node name="GravedadEstacion" parent="." instance=ExtResource( 1 )]
+
+[node name="Sprite" parent="GravedadEstacion" index="0"]
+modulate = Color( 0.07, 0.47, 0.69, 0 )
+
+[node name="Sprites" type="Node2D" parent="."]
+position = Vector2( -10, 32 )
+
+[node name="Parte1" type="Sprite" parent="Sprites"]
+position = Vector2( 152, -97 )
+rotation = 3.14159
+texture = ExtResource( 2 )
+
+[node name="Parte2" type="Sprite" parent="Sprites"]
+texture = ExtResource( 3 )
+
+[node name="Parte3" type="Sprite" parent="Sprites"]
+position = Vector2( 3, -229 )
+texture = ExtResource( 4 )
+
+[node name="Parte4" type="Sprite" parent="Sprites"]
+position = Vector2( 4, -148 )
+texture = ExtResource( 5 )
+
+[node name="AreaColision" type="Area2D" parent="."]
+position = Vector2( -10, 32 )
+collision_layer = 128
+collision_mask = 9
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaColision"]
+position = Vector2( 2, -23 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="AreaColision"]
+position = Vector2( -104, -97 )
+rotation = 1.5708
+scale = Vector2( 0.3, 0.15 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="AreaColision"]
+position = Vector2( 138, -99 )
+rotation = 1.5708
+scale = Vector2( 0.3, 0.25 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 2 )
+anims/rotacion_anti_horario = SubResource( 4 )
+anims/rotacion_horaria = SubResource( 3 )
+
+[node name="ImpactoSfx" type="AudioStreamPlayer2D" parent="."]
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="PuntosSpawn" type="Node2D" parent="."]
+
+[node name="Norte" type="Position2D" parent="PuntosSpawn"]
+position = Vector2( 0, -500 )
+
+[node name="Sur" type="Position2D" parent="PuntosSpawn"]
+position = Vector2( 0, 500 )
+
+[node name="Este" type="Position2D" parent="PuntosSpawn"]
+position = Vector2( 500, 0 )
+
+[node name="Oeste" type="Position2D" parent="PuntosSpawn"]
+position = Vector2( -500, 0 )
+
+[node name="RutaEnemigo" parent="." instance=ExtResource( 9 )]
+
+[node name="TimerSpawnEnemigos" type="Timer" parent="."]
+
+[node name="BarraSalud" parent="." instance=ExtResource( 10 )]
+margin_left = -81.0
+margin_top = -267.0
+margin_right = 71.0
+margin_bottom = -239.0
+rect_rotation = 0.0
+custom_styles/fg = SubResource( 5 )
+siempre_visible = true
+es_top_level = true
+
+[connection signal="body_entered" from="AreaColision" to="." method="_on_AreaColision_body_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="timeout" from="TimerSpawnEnemigos" to="." method="_on_TimerSpawnEnemigos_timeout"]
+
+[editable path="GravedadEstacion"]
